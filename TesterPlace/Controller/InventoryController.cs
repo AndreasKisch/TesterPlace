@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace TesterPlace.Controller
 {
 
-    [Route("v1/")]
+    [Route("inventory/")]
     [ApiController]
     public class InventoryController : ControllerBase
     {
@@ -25,6 +25,7 @@ namespace TesterPlace.Controller
         {
             _services = services;
         }
+
 
         [HttpPost]
         [Route("AddInventoryItems")]
