@@ -11,7 +11,7 @@ namespace TesterWebApplication.Controllers
     public class InventoryController : Controller
     {
         List<InventoryItems> ItemList = new List<InventoryItems>();
-        
+
         public async Task<IActionResult> Index()
         {
             using (HttpResponseMessage res = await Helper.InvAPI.GetAsync("Inventory/GetInventoryItems"))
@@ -28,5 +28,20 @@ namespace TesterWebApplication.Controllers
             }
             return View(ItemList);
         }
+
+        public async Task<IActionResult> Create()
+        {
+            //MultipartFormDataContent i = 
+            
+
+            //var content = new FormUrlEncodedContent(values);
+
+            //HttpResponseMessage res = await Helper.InvAPI.PostAsync("Inventory/GetInventoryItems", content);
+
+            return View(ItemList);
+
+        }
+
+
     }
 }
