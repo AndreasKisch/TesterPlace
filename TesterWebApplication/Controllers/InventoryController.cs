@@ -10,13 +10,23 @@ namespace TesterWebApplication.Controllers
 {
     public class InventoryController : Controller
     {
-
-
+        List<InventoryItems> ItemList = new List<InventoryItems>();
+        
         public async Task<IActionResult> Index()
         {
-            
+            using (HttpResponseMessage res = await Helper.InvAPI.GetAsync("Inventory/GetInventoryItems"))
+            {
+                if (res.IsSuccessStatusCode)
+                {
+                    ItemList = await res.Content.ReadAsAsync<List<InventoryItems>>();
 
-            return View();
+                }
+                else
+                {
+                    throw new Exception(res.ReasonPhrase);
+                }
+            }
+            return View(ItemList);
         }
     }
 }

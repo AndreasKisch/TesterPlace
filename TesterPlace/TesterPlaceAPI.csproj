@@ -5,6 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Data\InventoryList.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Data\InventoryList.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

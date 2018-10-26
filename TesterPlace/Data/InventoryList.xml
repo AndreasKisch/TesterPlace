@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Item>
+  <Item Id="1" ItemName="Book" Price="39"/>
+  <Item Id="2" ItemName="Phone" Price="249"/>
+  <Item Id="3" ItemName="Fork" Price="5"/>
+</Item>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,12 +25,13 @@ namespace TesterPlace.Controller
         public InventoryController(IInventoryServices services)
         {
             _services = services;
+            
         }
 
 
         [HttpPost]
         [Route("AddInventoryItems")]
-        public ActionResult<InventoryItems> AddInventoryItem(InventoryItems items)
+        public ActionResult<InventoryItems> AddInventoryItems(InventoryItems items)
         {
             var inventoryItems = _services.AddInventoryItems(items);
 
@@ -41,11 +43,9 @@ namespace TesterPlace.Controller
             return inventoryItems;
         }
 
-
-
         [HttpGet]
         [Route("GetInventoryItems")]
-        public ActionResult<Dictionary<string, InventoryItems>> GetInventoryItems()
+        public ActionResult<List<InventoryItems>> GetInventoryItems()
         {
             var inventoryItems = _services.GetInventoryItems();
 
@@ -54,7 +54,9 @@ namespace TesterPlace.Controller
                 return NotFound();
             }
 
-            return inventoryItems;
+            return inventoryItems.Values.ToList();
         }
+
+
     }
 }
