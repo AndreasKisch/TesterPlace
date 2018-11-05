@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
+
 namespace TesterWebApplication.Controllers
 {
     public class InventoryController : Controller
@@ -31,12 +32,9 @@ namespace TesterWebApplication.Controllers
 
         public async Task<IActionResult> Create()
         {
-            //MultipartFormDataContent i = 
-            
-
-            //var content = new FormUrlEncodedContent(values);
-
-            //HttpResponseMessage res = await Helper.InvAPI.PostAsync("Inventory/GetInventoryItems", content);
+            //InventoryItems i = new InventoryItems();
+            //HttpResponseMessage res = await Helper.InvAPI.PostAsJsonAsync("Inventory/AddInventoryItems/", i);
+           
 
             return View(ItemList);
 

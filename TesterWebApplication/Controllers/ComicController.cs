@@ -19,11 +19,11 @@ namespace TesterWebApplication.Controllers
             Comic comic;            
             if (false)
             {
-                //url = $"https://xkcd.com/{comicNumber}/info.0.json";
+                //url = $"{comicNumber}/info.0.json";
             }
             else
             {
-                url = $"https://xkcd.com/info.0.json";
+                url = $"info.0.json";
             }
 
 

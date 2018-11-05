@@ -16,7 +16,7 @@ namespace TesterWebApplication
         public static void InitializeClients()
         {
             ComicAPI = new HttpClient();
-            ComicAPI.BaseAddress = new Uri("https://xkcd.com/info.0.json");
+            ComicAPI.BaseAddress = new Uri("https://xkcd.com/");
             ComicAPI.DefaultRequestHeaders.Accept.Clear();
             ComicAPI.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 

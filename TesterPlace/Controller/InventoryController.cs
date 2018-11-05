@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml;
@@ -25,7 +26,7 @@ namespace TesterPlace.Controller
         public InventoryController(IInventoryServices services)
         {
             _services = services;
-            
+
         }
 
 
@@ -33,14 +34,14 @@ namespace TesterPlace.Controller
         [Route("AddInventoryItems")]
         public ActionResult<InventoryItems> AddInventoryItems(InventoryItems items)
         {
-            var inventoryItems = _services.AddInventoryItems(items);
 
-            if(inventoryItems == null)
+            var inventoryItems = _services.AddInventoryItems(items);
+            if (inventoryItems == null)
             {
                 return NotFound();
             }
 
-            return inventoryItems;
+            return Ok();
         }
 
         [HttpGet]
