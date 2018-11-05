@@ -3,5 +3,46 @@
     ViewData["Title"] = "Create";
 }
 
-<h2>Create</h2>
+<div>
+
+    <title>Create</title>
+    <style type="text/css">
+        .label {
+            color: #000000;
+            float: left;
+            background: yellow;
+            text-align: center
+        }
+
+        .input {
+            color: #000000;
+            float: left;
+            background: blue
+        }
+
+            .clearfloat::after {
+                content: '.';
+                display: block;
+                clear: both;
+                visibility: hidden;
+                line-height: 0px;
+                height: 0px;
+            }
+
+    </style>
+
+
+    <form action="Create" method="post" class="clearfloat">
+        <div class="label">
+            <label>ID</label><br />
+            <label>Item name</label><br />
+            <label>Price</label><br />
+        </div>
+        <div class="input">
+            <input type="number" name="ID" /><br />
+            <input type="text" name="ItemName" /><br />
+            <input type="number" name="Price" /><br />
+        </div>
+    </form>
+</div>
 
