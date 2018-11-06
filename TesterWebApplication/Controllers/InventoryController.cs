@@ -30,15 +30,17 @@ namespace TesterWebApplication.Controllers
             return View(ItemList);
         }
 
-        public async Task<IActionResult> Create(int id,string itemname,double price)
+        public async Task<IActionResult> Create(InventoryItems iObj)
         {
-            //InventoryItems i = new InventoryItems();
-            //HttpResponseMessage res = await Helper.InvAPI.PostAsJsonAsync("Inventory/AddInventoryItems/", i);
-           
+            HttpResponseMessage res = await Helper.InvAPI.PostAsJsonAsync("Inventory/AddInventoryItems/", iObj);
 
-            return View(ItemList);
+            if (res.IsSuccessStatusCode)
+                return View();
 
+            return View();
         }
+
+
 
 
     }

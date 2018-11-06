@@ -1,48 +1,40 @@
-﻿
+﻿@model TesterWebApplication.InventoryItems
+
 @{
     ViewData["Title"] = "Create";
 }
 
+<h2>Create</h2>
+
+<h4>InventoryItems</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ID" class="control-label"></label>
+                <input asp-for="ID" class="form-control" />
+                <span asp-validation-for="ID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ItemName" class="control-label"></label>
+                <input asp-for="ItemName" class="form-control" />
+                <span asp-validation-for="ItemName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
 <div>
-
-    <title>Create</title>
-    <style type="text/css">
-        .label {
-            color: #000000;
-            float: left;
-            background: yellow;
-            text-align: center
-        }
-
-        .input {
-            color: #000000;
-            float: left;
-            background: blue
-        }
-
-            .clearfloat::after {
-                content: '.';
-                display: block;
-                clear: both;
-                visibility: hidden;
-                line-height: 0px;
-                height: 0px;
-            }
-
-    </style>
-
-
-    <form action="Create" method="post" class="clearfloat">
-        <div class="label">
-            <label>ID</label><br />
-            <label>Item name</label><br />
-            <label>Price</label><br />
-        </div>
-        <div class="input">
-            <input type="number" name="ID" /><br />
-            <input type="text" name="ItemName" /><br />
-            <input type="number" name="Price" /><br />
-        </div>
-    </form>
+    <a asp-action="Index">Back to List</a>
 </div>
 
