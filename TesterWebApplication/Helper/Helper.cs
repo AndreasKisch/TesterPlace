@@ -11,6 +11,7 @@ namespace TesterWebApplication
     {
         public static HttpClient ComicAPI { get; set; }
         public static HttpClient InvAPI { get; set; }
+        public static HttpClient BookAPI { get; set; }
 
 
         public static void InitializeClients()
@@ -24,6 +25,11 @@ namespace TesterWebApplication
             InvAPI.BaseAddress = new Uri("http://localhost:59597");
             InvAPI.DefaultRequestHeaders.Accept.Clear();
             InvAPI.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            BookAPI = new HttpClient();
+            BookAPI.BaseAddress = new Uri("http://localhost:53658");
+            BookAPI.DefaultRequestHeaders.Accept.Clear();
+            BookAPI.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
         }
 

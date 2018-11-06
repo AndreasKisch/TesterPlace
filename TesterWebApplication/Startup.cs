@@ -51,6 +51,7 @@ namespace TesterWebApplication
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            Helper.InitializeClients();
 
             app.UseMvc(routes =>
             {

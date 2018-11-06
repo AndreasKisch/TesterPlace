@@ -11,5 +11,6 @@ namespace TesterPlace.Controller
     [ApiController]
     public class HomeController : ControllerBase
     {
+
     }
 }

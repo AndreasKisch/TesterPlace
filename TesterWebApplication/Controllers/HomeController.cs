@@ -15,7 +15,7 @@ namespace TesterWebApplication.Controllers
       
         public  IActionResult Index()
         {
-            Helper.InitializeClients();
+           
 
             return View();
         }
