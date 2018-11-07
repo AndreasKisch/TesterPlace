@@ -8,8 +8,38 @@
 <style>
     table {
         border: 1px solid #000000;
+        width: 100%;
     }
 
+    .filterInput{
+        width:100%;
+    }
+
+    .filterContainer {
+        display: flex;
+        width:100%;
+    }
+
+    .autherInput {
+        display: inline-block;
+    }
+
+    .titleInput {
+        display: inline-block;
+    }
+
+    .genreInput {
+        display: inline-block;
+    }
+    .smallWidth{
+        width:12%;
+    }
+    .mediumWidth{
+        width:17%;
+    }
+    .largeWidth{
+        width: 35%;
+    }
     tr:nth-child(even) {
         background: #9d9d9d
     }
@@ -23,6 +53,10 @@
         margin: auto;
         overflow: hidden;
     }
+
+    th:hover {
+        background: #8a9dfa;
+    }
 </style>
 
 
@@ -31,38 +65,43 @@
 
 
 <body>
+          
     <div class="container">
 
-        <label for="authorTxt">Author:</label>
-        <input id="authorTxt" type="text" placeholder="Search" />
+        <div class="filterContainer">
+            <div class="autherInput mediumWidth">
+                <label for="authorTxt">Author:</label>
+                <input id="authorTxt" type="text" class="filterInput"/>
+            </div>
+            <div class="titleInput largeWidth">
+                <label for="titleTxt">Title:</label>
+                <input id="titleTxt" type="text" class="filterInput"/>
+            </div>
+            <div class="genreInput smallWidth">
+                <label for="genreTxt">Genre:</label>
+                <input id="genreTxt" type="text" class="filterInput"/>
+            </div>
+        </div>
 
-        <label for="titleTxt">Title:</label>
-        <input id="titleTxt" type="text" />
-
-        <label for="genreTxt">Genre:</label>
-        <input id="genreTxt" type="text" />
-
-    </div>
-
-    <div class="container">
 
         <table id="bookTable" class="table" border="1">
             <thead>
                 <tr>
-                    <th>
-                        @Html.ActionLink("Author", "Index", new { sortOrder = "Author" })
+                    <th onclick="sortTable(0)" class="mediumWidth">
+                        @Html.DisplayNameFor(model => model.Author)
                     </th>
-                    <th>
-                        @Html.ActionLink("Title", "Index", new { sortOrder = "Title" })
+                    <th onclick="sortTable(1)" class="largeWidth">
+                        @Html.DisplayNameFor(model => model.Title)
+
                     </th>
-                    <th>
-                        @Html.ActionLink("Genre", "Index", new { sortOrder = "Genre" })
+                    <th onclick="sortTable(2)" class="smallWidth">
+                        @Html.DisplayNameFor(model => model.Genre)
                     </th>
-                    <th>
-                        @Html.ActionLink("Price", "Index", new { sortOrder = "Price" })
+                    <th onclick="sortTable(3)">
+                        @Html.DisplayNameFor(model => model.Price)
                     </th>
-                    <th>
-                        @Html.ActionLink("PDate", "Index", new { sortOrder = "PDate" })
+                    <th onclick="sortTable(4)">
+                        @Html.DisplayNameFor(model => model.PublishDate)
                     </th>
                     <th></th>
                 </tr>
@@ -71,20 +110,20 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
+                        <td class="mediumWidth">
                             @Html.DisplayFor(modelItem => item.Author)
                         </td>
-                        <td>
+                        <td class="largeWidth">
                             @Html.DisplayFor(modelItem => item.Title)
                         </td>
-                        <td>
+                        <td class="smallWidth">
                             @Html.DisplayFor(modelItem => item.Genre)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Price)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.PublishDate)
+                            @Html.DisplayFor(modelItem => item.PDate)
                         </td>
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { }) |
@@ -100,20 +139,52 @@
 
 @section Scripts {
     <script>
-        function filterByCell(cellNumber, input) {
-            var value = $(input).val().toLowerCase();
+
+        /*filter function to show filter result*/
+        function filterByCell(cellNumber, val) {
+            var value = val.toLowerCase();
             $("#bookTable tbody tr").filter(function () {
                 $(this).toggle($(this)[0].cells[cellNumber].textContent.toLowerCase().indexOf(value) > -1)
             });
-            console.log(input);
         }
-        /*Filter function for filter(loop array of tr)*/
+
+        /*Binds onkeyup to run filter function for assigned column*/
         $(document).ready(function () {
-            $("#authorTxt").on("keyup", filterByCell(0, (this)))
-            $("#titleTxt").on("keyup", filterByCell(1, (this)))
-            $("#genreTxt").on("keyup", filterByCell(2, (this)))
+            $("#authorTxt").on("keyup", function () {
+                filterByCell(0, $(this).val())
+            });
+            $("#titleTxt").on("keyup", function () {
+                filterByCell(1, $(this).val())
+            });
+            $("#genreTxt").on("keyup", function () {
+                filterByCell(2, $(this).val())
+            });
         });
 
+        function sortTable(cellIndex) {
+            var rows = $('#bookTable tbody  tr').get();
+
+            rows.sort(function (a, b) {
+
+                var A = $(a).children('td').eq(cellIndex).text().toUpperCase();
+                var B = $(b).children('td').eq(cellIndex).text().toUpperCase();
+
+                if (A < B) {
+                    return -1;
+                }
+
+                if (A > B) {
+                    return 1;
+                }
+
+                return 0;
+
+            });
+
+            $.each(rows, function (index, row) {
+                $('#bookTable').children('tbody').append(row);
+            });
+        }
 
 
     </script>

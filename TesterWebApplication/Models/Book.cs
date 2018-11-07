@@ -20,6 +20,8 @@ namespace TesterWebApplication
 
         public DateTime PublishDate { get; set; }
 
+        public string PDate { get { return PublishDate.ToShortDateString(); } }
+
         public string Description { get; set; }
 
     }
