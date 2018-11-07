@@ -1,84 +1,121 @@
 ﻿@model IEnumerable<TesterWebApplication.Book>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Book Store";
 }
 
-<h2>Index</h2>
-
+<h2>Book Store</h2>
 <style>
-    table{
-        border:1px solid #000000;
+    table {
+        border: 1px solid #000000;
     }
-    th {
 
+    tr:nth-child(even) {
+        background: #9d9d9d
     }
-    td{
 
-    }
-    tr:nth-child(even){
-        background:#9d9d9d
-    }
     tr:nth-child(odd) {
         background: #ffffff
     }
 
+    .container {
+        width: 80%;
+        margin: auto;
+        overflow: hidden;
+    }
 </style>
 
-<p>
-    <a asp-action="Index">Create New</a>
-</p>
-<table class="table" border="1">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Author)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Genre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PublishDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Author)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Genre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PublishDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
+
+
+
+
+
+<body>
+    <div class="container">
+
+        <label for="authorTxt">Author:</label>
+        <input id="authorTxt" type="text" placeholder="Search" />
+
+        <label for="titleTxt">Title:</label>
+        <input id="titleTxt" type="text" />
+
+        <label for="genreTxt">Genre:</label>
+        <input id="genreTxt" type="text" />
+
+    </div>
+
+    <div class="container">
+
+        <table id="bookTable" class="table" border="1">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.ActionLink("Author", "Index", new { sortOrder = "Author" })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Title", "Index", new { sortOrder = "Title" })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Genre", "Index", new { sortOrder = "Genre" })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Price", "Index", new { sortOrder = "Price" })
+                    </th>
+                    <th>
+                        @Html.ActionLink("PDate", "Index", new { sortOrder = "PDate" })
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Author)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Genre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.PublishDate)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { }) |
+                            @Html.ActionLink("Description", "Description", new { }) |
+                            @Html.ActionLink("Delete", "Delete", new { })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+
+@section Scripts {
+    <script>
+        function filterByCell(cellNumber, input) {
+            var value = $(input).val().toLowerCase();
+            $("#bookTable tbody tr").filter(function () {
+                $(this).toggle($(this)[0].cells[cellNumber].textContent.toLowerCase().indexOf(value) > -1)
+            });
+            console.log(input);
+        }
+        /*Filter function for filter(loop array of tr)*/
+        $(document).ready(function () {
+            $("#authorTxt").on("keyup", filterByCell(0, (this)))
+            $("#titleTxt").on("keyup", filterByCell(1, (this)))
+            $("#genreTxt").on("keyup", filterByCell(2, (this)))
+        });
+
+
+
+    </script>
+
 }
-    </tbody>
-</table>
