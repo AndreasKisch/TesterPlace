@@ -5,6 +5,11 @@ using System.Threading.Tasks;
 
 namespace TesterPlace
 {
+
+    /// <summary>
+    /// Class to hold information from Xml-doc
+    /// to be displayed
+    /// </summary>
     public class InventoryItems
     {
 

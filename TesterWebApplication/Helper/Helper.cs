@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace TesterWebApplication
 {
+
+    /// <summary>
+    /// Helps to hold Address to API used in controllers
+    /// 
+    /// </summary>
     public class Helper
     {
         public static HttpClient ComicAPI { get; set; }

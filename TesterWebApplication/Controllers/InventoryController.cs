@@ -13,6 +13,7 @@ namespace TesterWebApplication.Controllers
     {
         List<InventoryItems> ItemList = new List<InventoryItems>();
 
+
         public async Task<IActionResult> Index()
         {
             using (HttpResponseMessage res = await Helper.InvAPI.GetAsync("Inventory/GetInventoryItems"))
@@ -29,6 +30,7 @@ namespace TesterWebApplication.Controllers
             }
             return View(ItemList);
         }
+
 
         public async Task<IActionResult> Create(InventoryItems iObj)
         {

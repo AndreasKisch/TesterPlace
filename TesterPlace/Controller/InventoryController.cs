@@ -9,19 +9,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TesterPlace.Controller
 {
-
+    /// <summary>
+    /// Handels task to do with InventoryItems
+    /// 
+    /// </summary>
     [Route("inventory/")]
     [ApiController]
     public class InventoryController : ControllerBase
     {
         private readonly IInventoryServices _services;
-
-        [HttpGet]
-        [Route("ping")]
-        public IActionResult Ping()
-        {
-            return Ok("Pong");
-        }
+        
+               
 
         public InventoryController(IInventoryServices services)
         {
@@ -29,7 +27,12 @@ namespace TesterPlace.Controller
 
         }
 
-
+        /// <summary>
+        /// Calls services to add new inventoryItem
+        /// to the dictionary and Xml-doc
+        /// </summary>
+        /// <param name="items">Object to be added</param>
+        /// <returns>success message</returns>
         [HttpPost]
         [Route("AddInventoryItems")]
         public ActionResult<InventoryItems> AddInventoryItems(InventoryItems items)
@@ -41,9 +44,14 @@ namespace TesterPlace.Controller
                 return NotFound();
             }
 
-            return Ok();
+            return Ok(inventoryItems);
         }
 
+        /// <summary>
+        /// Gets container for current items
+        /// in dictionary
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("GetInventoryItems")]
         public ActionResult<List<InventoryItems>> GetInventoryItems()

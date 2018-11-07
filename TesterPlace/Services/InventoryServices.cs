@@ -6,10 +6,18 @@ using System.Xml;
 
 namespace TesterPlace
 {
+    /// <summary>
+    /// Service to load and add items to Xml-doc and dictionary
+    /// 
+    /// </summary>
     public class InventoryServices : IInventoryServices
     {
         private readonly Dictionary<string, InventoryItems> _inventoryItems;
 
+        /// <summary>
+        /// Constructor 
+        /// Adds values from Xml-doc into a a dictionary
+        /// </summary>
         public InventoryServices()
         {
             _inventoryItems = new Dictionary<string, InventoryItems>();
@@ -33,7 +41,13 @@ namespace TesterPlace
 
         }
 
-
+        /// <summary>
+        /// Adds object to dictionary
+        /// 
+        /// Funtion to add it to Xml to be written later
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
         public InventoryItems AddInventoryItems(InventoryItems items)
         {
             _inventoryItems.Add(items.ItemName, items);
@@ -41,6 +55,10 @@ namespace TesterPlace
             return items;
         }
 
+        /// <summary>
+        /// Simple return of the current dictionary of InventoryItems
+        /// </summary>
+        /// <returns></returns>
         public Dictionary<string, InventoryItems> GetInventoryItems()
         {
             return _inventoryItems;

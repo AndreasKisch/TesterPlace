@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace TesterWebApplication
 {
+    /// <summary>
+    /// Model to display values in View
+    /// </summary>
     public class InventoryItems
     {
 

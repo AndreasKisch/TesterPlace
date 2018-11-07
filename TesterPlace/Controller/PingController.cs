@@ -10,6 +10,10 @@ namespace TesterPlace.Controller
   
     public class PingController : ControllerBase
     {
+        /// <summary>
+        /// Check to see if you can access API
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("api/ping")]
         public IActionResult Ping()

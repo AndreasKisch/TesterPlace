@@ -10,6 +10,10 @@ using TesterWebApplication.Models;
 
 namespace TesterWebApplication.Controllers
 {
+    /// <summary>
+    /// Controller to be modified at later date
+    /// 
+    /// </summary>
     public class HomeController : Controller
     {
       
@@ -18,23 +22,7 @@ namespace TesterWebApplication.Controllers
            
 
             return View();
-        }
-
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public IActionResult Contact()
-        {
-            
-            
-            ViewData["Message"] = "Your contact page.";
-            
-            return View();
-        }
+        }             
 
         public IActionResult Privacy()
         {

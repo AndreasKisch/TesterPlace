@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TesterPlace.Controller
 {
+    /// <summary>
+    /// Default controller to be modified at later date
+    /// 
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class HomeController : ControllerBase

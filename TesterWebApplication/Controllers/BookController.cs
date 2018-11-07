@@ -11,6 +11,10 @@ namespace TesterWebApplication.Controllers
     {
         List<Book> BookList = new List<Book>();
 
+        /// <summary>
+        /// Access BooksearchAPI to get list of books
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
             using (HttpResponseMessage res = await Helper.BookAPI.GetAsync("books/Get"))

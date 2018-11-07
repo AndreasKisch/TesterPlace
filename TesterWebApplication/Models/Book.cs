@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace TesterWebApplication
 {
+    /// <summary>
+    /// Model to display values in View
+    /// </summary>
     public class Book
     {
         public string Author { get; set; }

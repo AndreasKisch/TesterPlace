@@ -11,7 +11,10 @@ namespace TesterWebApplication.Controllers
     public class ComicController : Controller
     {
         
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
             

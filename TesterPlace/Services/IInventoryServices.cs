@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace TesterPlace
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public interface IInventoryServices
     {
         InventoryItems AddInventoryItems(InventoryItems items);
