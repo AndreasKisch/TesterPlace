@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TesterWebApplication", "Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TesterLibrary", "TesterLibrary\TesterLibrary.csproj", "{F3816438-1AE4-4860-A47E-2BBA5BBC9F15}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookSearchAPI", "..\BookSearch\BookSearch\BookSearchAPI.csproj", "{674427C5-E158-4864-96A0-EE0CF2BC9562}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookSearchAPI", "BookSearch\BookSearchAPI.csproj", "{2213D0A6-03D1-47E5-A7C5-1805517CB57C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{F3816438-1AE4-4860-A47E-2BBA5BBC9F15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3816438-1AE4-4860-A47E-2BBA5BBC9F15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3816438-1AE4-4860-A47E-2BBA5BBC9F15}.Release|Any CPU.Build.0 = Release|Any CPU
-		{674427C5-E158-4864-96A0-EE0CF2BC9562}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{674427C5-E158-4864-96A0-EE0CF2BC9562}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{674427C5-E158-4864-96A0-EE0CF2BC9562}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{674427C5-E158-4864-96A0-EE0CF2BC9562}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2213D0A6-03D1-47E5-A7C5-1805517CB57C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2213D0A6-03D1-47E5-A7C5-1805517CB57C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2213D0A6-03D1-47E5-A7C5-1805517CB57C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2213D0A6-03D1-47E5-A7C5-1805517CB57C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
