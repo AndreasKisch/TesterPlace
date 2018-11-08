@@ -13,6 +13,8 @@ namespace BookSearch.Models
     /// </summary>
     public class Book
     {
+        public string Id { get; set; }
+
         public string Author { get; set; }
 
         public string Title { get; set; }
@@ -26,6 +28,16 @@ namespace BookSearch.Models
         public string PDate { get { return PublishDate.ToShortDateString(); } }
 
         public string Description { get; set; }
+
+        public void UpdateInfo(Book b)
+        {
+            this.Author = b.Author;
+            this.Title = b.Title;
+            this.Genre  = b.Genre;
+            this.Price = b.Price;
+            this.PublishDate = b.PublishDate;
+            this.Description = b.Description;
+        }
 
     }
 }

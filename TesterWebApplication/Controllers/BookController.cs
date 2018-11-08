@@ -9,7 +9,7 @@ namespace TesterWebApplication.Controllers
 {
     public class BookController : Controller
     {
-        List<Book> BookList = new List<Book>();
+        Dictionary<string,Book> bookList = new Dictionary<string, Book>();
 
         /// <summary>
         /// Access BooksearchAPI to get list of books
@@ -22,13 +22,35 @@ namespace TesterWebApplication.Controllers
 
                 if (res.IsSuccessStatusCode)
                 {
-                    BookList = await res.Content.ReadAsAsync<List<Book>>();
+                    bookList = await res.Content.ReadAsAsync< Dictionary<string, Book>> ();
 
                 }
 
             }
-            return View(BookList);
+            return View(bookList.Values.ToList());
         }
+
+
+        public ActionResult Details(int? id)
+        {
+
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            //Book b = bookList
+
+            return View();
+        }
+
+        public  ActionResult Edit(int? id)
+        {
+
+            return View();
+        }
+
+
+
 
     }
 }

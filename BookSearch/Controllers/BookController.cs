@@ -10,8 +10,8 @@ namespace BookSearch.Controllers
 {
     /// <summary>
     /// Controller handeling access to 
-    /// xml-file allowing adding, removing and getting
-    /// book items
+    /// dictionary containing info regarding 
+    /// books
     /// </summary>
     [Route("books/")]
     [ApiController]
@@ -33,7 +33,7 @@ namespace BookSearch.Controllers
         /// <returns>List of books</returns>
         [Route("Get")]
         [HttpGet]
-        public ActionResult<List<Book>> Get()
+        public ActionResult<Dictionary<string,Book>> Get()
         {
 
             var bookList = _services.GetBookList();
@@ -43,7 +43,7 @@ namespace BookSearch.Controllers
                 return NotFound();
             }
 
-            return bookList.Values.ToList();
+            return bookList;
         }
 
         /// <summary>
@@ -57,15 +57,35 @@ namespace BookSearch.Controllers
         public ActionResult<List<Book>> Post(Book b)
         {
 
-            var bookList = _services.AddBook(b);
+            var book = _services.AddBook(b);
 
-            if (bookList == null)
+            if (book == null)
             {
                 return NotFound();
             }
 
-            return Ok(bookList);
+            return Ok(book);
         }
+
+        /// <summary>
+        /// Updates information of a book stored in services bookList
+        /// </summary>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        [Route("Put")]
+        [HttpPut]
+        public ActionResult Put(Book b)
+        {
+            var book = _services.UpdateBook(b);
+
+            if (book == null)
+            {
+                BadRequest(b);
+            }
+
+            return Ok(b);
+        }
+
     }
 
 

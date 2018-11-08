@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace BookSearch
 {
@@ -13,7 +15,7 @@ namespace BookSearch
     {
         private readonly Dictionary<string, Models.Book> _bookList;
         XDocument doc;
-
+        
         /// <summary>
         /// Opens link to Xml file and adds content to a dictionary
         /// </summary>
@@ -32,11 +34,10 @@ namespace BookSearch
         /// <returns></returns>
         public Book AddBook(Book b)
         {
-            _bookList.Add(b.Title, b);
+            _bookList.Add(b.Id, b);
 
             return b;
         }
-
         /// <summary>
         /// Sends back content from Xml
         /// </summary>
@@ -47,6 +48,10 @@ namespace BookSearch
         }
 
 
+        private IEnumerable<XElement> GetXmlElement()
+        {
+            return doc.Root.Elements();
+        }
         /// <summary>
         /// Method goes through and loads XElements in to a 
         /// bookObj which is added to a dictionary
@@ -57,21 +62,30 @@ namespace BookSearch
             foreach (XElement item in GetXmlElement())
             {
                 Book b = new Book();
+                b.Id = item.Attribute("id").Value.ToString();
                 b.Author = item.Element("author").Value;
                 b.Genre = item.Element("genre").Value;
                 b.Title = item.Element("title").Value;
                 b.Price = decimal.Parse(item.Element("price").Value, CultureInfo.InvariantCulture);
                 b.PublishDate = DateTime.Parse(item.Element("publish_date").Value);
                 b.Description = item.Element("description").Value;
-
-
                 AddBook(b);
             }
+        }             
+
+
+        public object UpdateBook(Book b)
+        {
+            Book temp = _bookList[b.Id];
+
+            if (temp != null)
+            {
+                temp.UpdateInfo(b);
+            }
+
+            return temp;
+
         }
 
-        private IEnumerable<XElement> GetXmlElement()
-        {
-            return doc.Root.Elements();
-        }
     }
 }

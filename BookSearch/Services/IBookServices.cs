@@ -15,7 +15,6 @@ namespace BookSearch
     {
         Book AddBook(Book b);
         Dictionary<string, Book> GetBookList();
-
-
+        object UpdateBook(Book b);
     }
 }
