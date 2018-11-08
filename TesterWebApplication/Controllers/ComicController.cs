@@ -30,7 +30,7 @@ namespace TesterWebApplication.Controllers
             }
 
 
-            using (HttpResponseMessage res = await Helper.ComicAPI.GetAsync(url))
+            using (HttpResponseMessage res = await APIHelper.ComicAPI.GetAsync(url))
             {
                 if (res.IsSuccessStatusCode)
                 {

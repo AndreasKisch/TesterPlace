@@ -33,7 +33,7 @@ namespace BookSearch.Controllers
         /// <returns>List of books</returns>
         [Route("Get")]
         [HttpGet]
-        public ActionResult<Dictionary<string,Book>> Get()
+        public ActionResult<Dictionary<string, Book>> Get()
         {
 
             var bookList = _services.GetBookList();
@@ -42,7 +42,6 @@ namespace BookSearch.Controllers
             {
                 return NotFound();
             }
-
             return bookList;
         }
 

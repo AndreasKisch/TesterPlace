@@ -11,13 +11,13 @@
         width: 100%;
     }
 
-    .filterInput{
-        width:100%;
+    .filterInput {
+        width: 100%;
     }
 
     .filterContainer {
         display: flex;
-        width:100%;
+        width: 100%;
     }
 
     .autherInput {
@@ -31,15 +31,19 @@
     .genreInput {
         display: inline-block;
     }
-    .smallWidth{
-        width:12%;
+
+    .smallWidth {
+        width: 12%;
     }
-    .mediumWidth{
-        width:17%;
+
+    .mediumWidth {
+        width: 17%;
     }
-    .largeWidth{
+
+    .largeWidth {
         width: 35%;
     }
+
     tr:nth-child(even) {
         background: #9d9d9d
     }
@@ -65,21 +69,21 @@
 
 
 <body>
-          
+
     <div class="container">
 
         <div class="filterContainer">
             <div class="autherInput mediumWidth">
                 <label for="authorTxt">Author:</label>
-                <input id="authorTxt" type="text" class="filterInput"/>
+                <input id="authorTxt" type="text" class="filterInput" />
             </div>
             <div class="titleInput largeWidth">
                 <label for="titleTxt">Title:</label>
-                <input id="titleTxt" type="text" class="filterInput"/>
+                <input id="titleTxt" type="text" class="filterInput" />
             </div>
             <div class="genreInput smallWidth">
                 <label for="genreTxt">Genre:</label>
-                <input id="genreTxt" type="text" class="filterInput"/>
+                <input id="genreTxt" type="text" class="filterInput" />
             </div>
         </div>
 
@@ -126,7 +130,7 @@
                             @Html.DisplayFor(modelItem => item.PDate)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id}) |
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                             @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                             @Html.ActionLink("Delete", "Delete", new { id = item.Id })
                         </td>

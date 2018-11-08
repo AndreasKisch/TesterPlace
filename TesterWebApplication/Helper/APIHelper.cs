@@ -12,12 +12,13 @@ namespace TesterWebApplication
     /// Helps to hold Address to API used in controllers
     /// 
     /// </summary>
-    public class Helper
+    public class APIHelper
     {
         public static HttpClient ComicAPI { get; set; }
         public static HttpClient InvAPI { get; set; }
         public static HttpClient BookAPI { get; set; }
 
+       
 
         public static void InitializeClients()
         {
@@ -35,7 +36,6 @@ namespace TesterWebApplication
             BookAPI.BaseAddress = new Uri("http://localhost:53658");
             BookAPI.DefaultRequestHeaders.Accept.Clear();
             BookAPI.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
         }
 
         

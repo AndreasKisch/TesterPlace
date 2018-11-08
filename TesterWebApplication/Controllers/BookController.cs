@@ -4,12 +4,13 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using System.Web;
+using Microsoft.AspNetCore.Http;
 
 namespace TesterWebApplication.Controllers
 {
     public class BookController : Controller
     {
-        Dictionary<string,Book> bookList = new Dictionary<string, Book>();
 
         /// <summary>
         /// Access BooksearchAPI to get list of books
@@ -17,36 +18,50 @@ namespace TesterWebApplication.Controllers
         /// <returns></returns>
         public async Task<IActionResult> Index(string sortOrder)
         {
-            using (HttpResponseMessage res = await Helper.BookAPI.GetAsync("books/Get"))
+
+            Dictionary<string, Book> bookList = new Dictionary<string, Book>();
+
+            using (HttpResponseMessage res = await APIHelper.BookAPI.GetAsync("books/Get"))
             {
 
                 if (res.IsSuccessStatusCode)
                 {
-                    bookList = await res.Content.ReadAsAsync< Dictionary<string, Book>> ();
-
+                    bookList = await res.Content.ReadAsAsync<Dictionary<string, Book>>();
                 }
 
             }
-            return View(bookList.Values.ToList());
+            if (Helper.SessionHelper.Get<Dictionary<string, Book>>(HttpContext.Session, "bList") == null)
+            {
+                Helper.SessionHelper.Set<Dictionary<string, Book>>(HttpContext.Session, "bList", bookList);
+            }
+
+            return View(Helper.SessionHelper.Get<Dictionary<string, Book>>(HttpContext.Session, "bList").Values.ToList());
         }
 
 
-        public ActionResult Details(int? id)
+        public ActionResult Details(string id)
         {
 
             if (id == null)
             {
                 return BadRequest();
             }
-            //Book b = bookList
+            Dictionary<string, Book> books =
+                Helper.SessionHelper.Get<Dictionary<string, Book>>(HttpContext.Session, "bList");
 
-            return View();
+            return View(books[id]);
         }
 
-        public  ActionResult Edit(int? id)
+        public ActionResult Edit(string id)
         {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            Dictionary<string, Book> books =
+                Helper.SessionHelper.Get<Dictionary<string, Book>>(HttpContext.Session, "bList");
 
-            return View();
+            return View(books[id]);
         }
 
 

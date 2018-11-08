@@ -16,7 +16,7 @@ namespace TesterWebApplication.Controllers
 
         public async Task<IActionResult> Index()
         {
-            using (HttpResponseMessage res = await Helper.InvAPI.GetAsync("Inventory/GetInventoryItems"))
+            using (HttpResponseMessage res = await APIHelper.InvAPI.GetAsync("Inventory/GetInventoryItems"))
             {
                 if (res.IsSuccessStatusCode)
                 {
@@ -34,7 +34,7 @@ namespace TesterWebApplication.Controllers
 
         public async Task<IActionResult> Create(InventoryItems iObj)
         {
-            HttpResponseMessage res = await Helper.InvAPI.PostAsJsonAsync("Inventory/AddInventoryItems/", iObj);
+            HttpResponseMessage res = await APIHelper.InvAPI.PostAsJsonAsync("Inventory/AddInventoryItems/", iObj);
 
             if (res.IsSuccessStatusCode)
                 return View();
