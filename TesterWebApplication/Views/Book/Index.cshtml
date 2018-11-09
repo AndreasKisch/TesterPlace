@@ -133,6 +133,7 @@
                             @Html.DisplayFor(modelItem => item.PDate)
                         </td>
                         <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                             @Html.ActionLink("Details", "Details", new { id = item.Id })
                         </td>
                     </tr>
@@ -153,7 +154,7 @@
                 $(this).toggle($(this)[0].cells[cellNumber].textContent.toLowerCase().indexOf(value) > -1)
             });
         }
-        
+
 
         /*Binds onkeyup to run filter function for assigned column*/
         $(document).ready(function () {

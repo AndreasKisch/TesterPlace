@@ -11,11 +11,12 @@ namespace TesterWebApplication.Controllers
 {
     public class InventoryController : Controller
     {
-        List<InventoryItems> ItemList = new List<InventoryItems>();
 
 
         public async Task<IActionResult> Index()
         {
+            List<InventoryItems> ItemList = new List<InventoryItems>();
+
             using (HttpResponseMessage res = await APIHelper.InvAPI.GetAsync("Inventory/GetInventoryItems"))
             {
                 if (res.IsSuccessStatusCode)
@@ -28,16 +29,25 @@ namespace TesterWebApplication.Controllers
                     throw new Exception(res.ReasonPhrase);
                 }
             }
+            Helper.SessionHelper.Set<List<InventoryItems>>(HttpContext.Session, "iList", ItemList);
+
             return View(ItemList);
         }
 
+        public IActionResult Edit(string itemName)
+        {
+            List<InventoryItems> iList = Helper.SessionHelper.Get<List<InventoryItems>>(HttpContext.Session, "iList");
+            InventoryItems item = iList.Find(x => x.ItemName == itemName);
+
+            return View(item);
+        }
 
         public async Task<IActionResult> Create(InventoryItems iObj)
         {
             HttpResponseMessage res = await APIHelper.InvAPI.PostAsJsonAsync("Inventory/AddInventoryItems/", iObj);
 
             if (res.IsSuccessStatusCode)
-                return View();
+                return Redirect("Index");
 
             return View();
         }

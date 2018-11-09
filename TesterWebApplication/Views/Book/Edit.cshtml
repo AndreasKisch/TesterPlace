@@ -1,0 +1,49 @@
+﻿@model Book
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+<h4>Book</h4>
+<style>
+    .editContainer {
+        display: inline-block;
+    }
+
+
+    #bInput {
+        width: 100%;
+    }
+
+</style>
+
+<div>
+
+    <form asp-action="Put" asp-controller="Book" method="put">
+
+        <div class="editContainer">
+            @Html.LabelFor(model => model.Author);<br />
+            @Html.LabelFor(model => model.Title);<br />
+            @Html.LabelFor(model => model.Genre);<br />
+            @Html.LabelFor(model => model.PublishDate);<br />
+            @Html.LabelFor(model => model.Price);<br />
+        </div>
+        <div class="editContainer">
+            <input id="bInput" name="Author" type="text" value="@Model.Author" /><br />
+            <input id="bInput" name="Title" type="text" value="@Model.Title" /><br />
+            <input id="bInput" name="Genre" type="text" value="@Model.Genre" /><br />
+            <input id="bInput" name="PublishDate" type="date" value="@Model.PDate" /><br />
+            <input id="bInput" name="Price" type="text" value="@Model.Price" /><br />
+        </div>
+
+        <input type="hidden" name="Description" value="@Model.Description" />
+        <input type="hidden" name="Id" value="@Model.Id" />
+
+        <div>
+            <input id="submitBook" type="submit" value="submit" />
+        </div>
+    </form>
+</div>
+
+
+

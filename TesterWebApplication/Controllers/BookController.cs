@@ -37,7 +37,33 @@ namespace TesterWebApplication.Controllers
         }
 
 
+        /// <summary>
+        /// Gets book that is suppose to be edited
+        /// and sends it to for data to view
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public IActionResult Edit(string id)
+        {
+            Dictionary<string, Book> bList = Helper.SessionHelper.Get<Dictionary<string, Book>>(HttpContext.Session, "bList");
+            Book b = bList[id];
 
+            return View(b);
+        }
+
+        /// <summary>
+        /// Sends a put request to update a book in the API
+        /// then redirects back to Index view to see updates
+        /// </summary>
+        /// <param name="b"></param>
+        /// <returns></returns>
+        public async Task<IActionResult> Put(Book b)
+        {
+
+            await APIHelper.BookAPI.PutAsJsonAsync("books/put", b);
+
+            return Redirect("Index");
+        }
 
         /// <summary>
         /// Give detailed view of the book
