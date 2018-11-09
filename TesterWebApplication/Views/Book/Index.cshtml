@@ -71,6 +71,10 @@
 <body>
 
     <div class="container">
+        <form asp-controller="Book" asp-action="Index">
+            <input id="bookInput" name="searchValue" type="text" placeholder="Search for title" />
+            <input id="bookSubmit" type="submit" value="submit" />
+        </form>
 
         <div class="filterContainer">
             <div class="autherInput mediumWidth">

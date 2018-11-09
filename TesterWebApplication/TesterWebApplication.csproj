@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Images\" />
+    <None Include="wwwroot\images\bookBackground.jpg" />
   </ItemGroup>
 
 </Project>

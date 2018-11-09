@@ -8,6 +8,7 @@
         width: 100%;
         background: #fe51e5;
         text-align: center;
+        padding: 10px;
     }
 
     .marginLeft10 {
@@ -31,7 +32,7 @@
 
     <div class="comicButtonContainer">
         <input id="PrevBtn" type="button" value="Prev" onclick="location.href='@Url.Action("Index", "Comic", new { comicNumber = int.Parse(Model.Num) -1})'" />
-        <input id="NextBtn" type="button" value="Next" class="marginLeft10" onclick="location.href='@Url.Action("Index", "Comic", new { comicNumber = int.Parse(Model.Num) -1})'" />
+        <input id="NextBtn" type="button" value="Next" class="marginLeft10" onclick="location.href='@Url.Action("Index", "Comic", new { comicNumber = int.Parse(Model.Num) +1})'" />
     </div>
     <div class="comicContainer">
 
