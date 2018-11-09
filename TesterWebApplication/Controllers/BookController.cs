@@ -16,12 +16,12 @@ namespace TesterWebApplication.Controllers
         /// Access BooksearchAPI to get list of books
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string searchValue)
         {
 
             Dictionary<string, Book> bookList = new Dictionary<string, Book>();
 
-            using (HttpResponseMessage res = await APIHelper.BookAPI.GetAsync("books/Get"))
+            using (HttpResponseMessage res = await APIHelper.BookAPI.GetAsync("books/GetSearch?searchValue=" + searchValue))
             {
 
                 if (res.IsSuccessStatusCode)
@@ -30,13 +30,14 @@ namespace TesterWebApplication.Controllers
                 }
 
             }
-            if (Helper.SessionHelper.Get<Dictionary<string, Book>>(HttpContext.Session, "bList") == null)
-            {
-                Helper.SessionHelper.Set<Dictionary<string, Book>>(HttpContext.Session, "bList", bookList);
-            }
+            Helper.SessionHelper.Set<Dictionary<string, Book>>(HttpContext.Session, "bList", bookList);
+
 
             return View(Helper.SessionHelper.Get<Dictionary<string, Book>>(HttpContext.Session, "bList").Values.ToList());
         }
+
+
+
 
         /// <summary>
         /// Give detailed view of the book
@@ -46,7 +47,6 @@ namespace TesterWebApplication.Controllers
         /// <returns></returns>
         public ActionResult Details(string id)
         {
-
             if (id == null)
             {
                 return BadRequest();

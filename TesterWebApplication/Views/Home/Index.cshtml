@@ -1,5 +1,87 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<style>
+    .topContainer {
+        width: 80%;
+        margin: auto;
+        padding-top: 1%;
+        overflow: hidden;
+    }
 
+    .card {
+        width: 25%;
+        display: inline-block;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        overflow: hidden;
+        margin: 1%;
+        background: #90f3ed;
+    }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            background: #3ba5ff;
+        }
+
+    .cardContainer {
+        padding: 2px 16px;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .middleContainer {
+        text-align: center;
+        padding: 10%;
+        height:100%;
+        background-image:url("../../Images/bookBackground.jpg");
+        background-position:center;
+        background-repeat:no-repeat;
+        background-size:contain;
+    }
+</style>
+
+<div class="topContainer">
+    <div class="card">
+        <a asp-controller="Comic" asp-action="Index">
+            <div class="cardContainer">
+                <h4>Click here to go to ComicControllers Index View.</h4>
+                <p>
+                    You will see some beautiful comic retrived from https://xkcd.com/.
+                </p>
+            </div>
+        </a>
+    </div>
+    <div class="card">
+        <a asp-controller="Inventory" asp-action="Index">
+            <div class="cardContainer">
+                <h4>Click here to go to InventoryController Index View.</h4>
+                <p>
+                    Simple display of a table were you can create items
+                    to be added in view.
+                </p>
+            </div>
+        </a>
+    </div>
+    <div class="card">
+        <a asp-controller="Book" asp-action="Index">
+            <div class="cardContainer">
+                <h4>Click here to go to BookController Index View.</h4>
+                <p>
+                    Displays and allows filtering and sorting of
+                    data gotten from BookSearchAPI.
+                </p>
+            </div>
+        </a>
+    </div>
+</div>
+
+<div class="middleContainer">
+    <form action="Book/Index" method="GET">
+        <input id="bookInput" name="searchValue" type="text" placeholder="Search for title"/>
+        <input id="bookSubmit" type="submit" value="submit" />
+</form>
+</div>
 

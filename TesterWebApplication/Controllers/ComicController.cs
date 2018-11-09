@@ -15,15 +15,15 @@ namespace TesterWebApplication.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> Index(int comicNumber = 0)
+        public async Task<IActionResult> Index(int comicNumber)
         {
 
             string url = "";
             Comic comic;
-
-            if (comicNumber >= 1)
+            int temp = Helper.SessionHelper.Get<int>(HttpContext.Session, "ComicMaxNumber");
+            if (comicNumber >= 1 && comicNumber < temp)
             {
-                url = $"{comicNumber}/info.0.json"; 
+                url = $"{comicNumber}/info.0.json";
             }
             else
             {
@@ -47,10 +47,14 @@ namespace TesterWebApplication.Controllers
 
 
             }
-            ViewData["Img"] = comic.Img;
-            ViewData["Num"] = comic.Num;
+            
 
-            return View();
+            if (Helper.SessionHelper.Get<int>(HttpContext.Session, "ComicMaxNumber") == 0)
+            {
+                Helper.SessionHelper.Set<int>(HttpContext.Session, "ComicMaxNumber", int.Parse(comic.Num));
+            }
+
+            return View(comic);
 
         }
     }

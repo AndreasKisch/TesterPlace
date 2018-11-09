@@ -1,13 +1,45 @@
-﻿
+﻿@model Comic
 @{
     ViewData["Title"] = "Index";
 }
 
+<style>
+    .mainContainer {
+        width: 100%;
+        background: #fe51e5;
+        text-align: center;
+    }
+
+    .marginLeft10 {
+        margin-left: 10%;
+    }
+
+    .comicContainer {
+    }
+
+    .comicButtonContainer {
+    }
+
+    .comicButton {
+    }
+</style>
+
+
+
 <h2>Comic</h2>
-<body>
-    <img src=@ViewData["Img"]>
+<div class="mainContainer">
+
+    <div class="comicButtonContainer">
+        <input id="PrevBtn" type="button" value="Prev" onclick="location.href='@Url.Action("Index", "Comic", new { comicNumber = int.Parse(Model.Num) -1})'" />
+        <input id="NextBtn" type="button" value="Next" class="marginLeft10" onclick="location.href='@Url.Action("Index", "Comic", new { comicNumber = int.Parse(Model.Num) -1})'" />
+    </div>
+    <div class="comicContainer">
+
+        <img src=@Model.Img>
+    </div>
+
+</div>
 
 
-</body>
 
 

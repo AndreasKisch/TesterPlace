@@ -87,7 +87,6 @@
             </div>
         </div>
 
-
         <table id="bookTable" class="table" border="1">
             <thead>
                 <tr>
@@ -136,6 +135,7 @@
                 }
             </tbody>
         </table>
+
     </div>
 </body>
 
@@ -149,15 +149,18 @@
                 $(this).toggle($(this)[0].cells[cellNumber].textContent.toLowerCase().indexOf(value) > -1)
             });
         }
+        
 
         /*Binds onkeyup to run filter function for assigned column*/
         $(document).ready(function () {
             $("#authorTxt").on("keyup", function () {
                 filterByCell(0, $(this).val())
             });
+
             $("#titleTxt").on("keyup", function () {
                 filterByCell(1, $(this).val())
             });
+
             $("#genreTxt").on("keyup", function () {
                 filterByCell(2, $(this).val())
             });
@@ -165,7 +168,6 @@
 
         function sortTable(cellIndex) {
             var rows = $('#bookTable tbody  tr').get();
-
             rows.sort(function (a, b) {
 
                 var A = $(a).children('td').eq(cellIndex).text().toUpperCase();

@@ -45,6 +45,20 @@ namespace BookSearch.Controllers
             return bookList;
         }
 
+        [Route("GetSearch")]
+        [HttpGet]
+        public ActionResult<Dictionary<string, Book>> Get(string searchValue)
+        {
+
+            var bookList = _services.GetBookList(searchValue);
+
+            if (bookList == null)
+            {
+                return NotFound();
+            }
+            return bookList;
+        }
+
         /// <summary>
         /// Allows user to add elements to
         /// bookList

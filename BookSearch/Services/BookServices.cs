@@ -15,7 +15,7 @@ namespace BookSearch
     {
         private readonly Dictionary<string, Models.Book> _bookList;
         XDocument doc;
-        
+
         /// <summary>
         /// Opens link to Xml file and adds content to a dictionary
         /// </summary>
@@ -38,12 +38,37 @@ namespace BookSearch
 
             return b;
         }
+
         /// <summary>
         /// Sends back content from Xml
         /// </summary>
         /// <returns></returns>
         public Dictionary<string, Book> GetBookList()
         {
+            return _bookList;
+        }
+
+        /// <summary>
+        /// Sends back content matching the searchValue
+        /// </summary>
+        /// <param name="searchValue">value to match</param>
+        /// <returns></returns>
+        public Dictionary<string, Book> GetBookList(string searchValue)
+        {
+            if (searchValue != null)
+            {
+                Dictionary<string, Book> searchResults = new Dictionary<string, Book>();
+
+                foreach (Book book in _bookList.Values)
+                {
+                    if (book.Title.IndexOf(searchValue, StringComparison.OrdinalIgnoreCase) >= 0)
+                    {
+                        searchResults.Add(book.Id, book);
+                    }
+
+                }
+                return searchResults; 
+            }
             return _bookList;
         }
 
@@ -71,7 +96,7 @@ namespace BookSearch
                 b.Description = item.Element("description").Value;
                 AddBook(b);
             }
-        }             
+        }
 
         /// <summary>
         /// Gets book from dictionary and
@@ -91,6 +116,7 @@ namespace BookSearch
             return temp;
 
         }
+
 
     }
 }

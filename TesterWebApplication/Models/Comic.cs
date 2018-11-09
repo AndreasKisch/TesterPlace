@@ -10,7 +10,7 @@ namespace TesterWebApplication.Models
     /// </summary>
     public class Comic
     {
-        public int Num{ get; set; }
+        public string Num{ get; set; }
 
         public string Img { get; set; }
     }

@@ -59,7 +59,7 @@ namespace TesterWebApplication
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Book}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
