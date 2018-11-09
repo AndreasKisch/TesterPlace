@@ -29,7 +29,7 @@ namespace TesterPlace
                     if (reader.HasAttributes)
                     {
                         InventoryItems i = new InventoryItems();
-                        i.ID = Int32.Parse(reader.GetAttribute("Id"));
+                        i.Quantity = Int32.Parse(reader.GetAttribute("Quantity"));
                         i.ItemName = reader.GetAttribute("ItemName");
                         i.Price = Int32.Parse(reader.GetAttribute("Price"));
 
@@ -48,11 +48,16 @@ namespace TesterPlace
         /// </summary>
         /// <param name="items"></param>
         /// <returns></returns>
+
         public InventoryItems AddInventoryItems(InventoryItems items)
         {
-            _inventoryItems.Add(items.ItemName, items);
+            if (items.ItemName != null)
+            {
+                _inventoryItems.Add(items.ItemName, items);
+                return items;
+            }
 
-            return items;
+            return null;
         }
 
         /// <summary>

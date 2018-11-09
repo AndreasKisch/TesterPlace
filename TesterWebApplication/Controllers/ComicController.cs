@@ -10,24 +10,27 @@ namespace TesterWebApplication.Controllers
 {
     public class ComicController : Controller
     {
-        
+
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int comicNumber = 0)
         {
-            
+
             string url = "";
-            Comic comic;            
-            if (false)
+            Comic comic;
+
+            if (comicNumber >= 1)
             {
-                //url = $"{comicNumber}/info.0.json";
+                url = $"{comicNumber}/info.0.json"; 
             }
             else
             {
-                url = $"info.0.json";
+                url = $"/info.0.json";
+
             }
+
 
 
             using (HttpResponseMessage res = await APIHelper.ComicAPI.GetAsync(url))

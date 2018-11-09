@@ -38,22 +38,15 @@ namespace TesterWebApplication.Controllers
             return View(Helper.SessionHelper.Get<Dictionary<string, Book>>(HttpContext.Session, "bList").Values.ToList());
         }
 
-
+        /// <summary>
+        /// Give detailed view of the book
+        /// with description
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Details(string id)
         {
 
-            if (id == null)
-            {
-                return BadRequest();
-            }
-            Dictionary<string, Book> books =
-                Helper.SessionHelper.Get<Dictionary<string, Book>>(HttpContext.Session, "bList");
-
-            return View(books[id]);
-        }
-
-        public ActionResult Edit(string id)
-        {
             if (id == null)
             {
                 return BadRequest();

@@ -11,7 +11,7 @@ namespace TesterWebApplication
     public class InventoryItems
     {
 
-        public int ID { get; set; }
+        public int Quantity { get; set; }
 
         public string ItemName { get; set; }
 

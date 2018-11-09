@@ -73,7 +73,12 @@ namespace BookSearch
             }
         }             
 
-
+        /// <summary>
+        /// Gets book from dictionary and
+        /// updates old information to user gave
+        /// </summary>
+        /// <param name="b"></param>
+        /// <returns></returns>
         public object UpdateBook(Book b)
         {
             Book temp = _bookList[b.Id];

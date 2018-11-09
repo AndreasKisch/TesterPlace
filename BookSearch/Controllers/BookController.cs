@@ -47,7 +47,7 @@ namespace BookSearch.Controllers
 
         /// <summary>
         /// Allows user to add elements to
-        /// bookList and Xml-doc
+        /// bookList
         /// </summary>
         /// <param name="b">Object to be added</param>
         /// <returns></returns>
