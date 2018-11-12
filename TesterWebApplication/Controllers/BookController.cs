@@ -83,6 +83,28 @@ namespace TesterWebApplication.Controllers
             return View(books[id]);
         }
 
+        /// <summary>
+        /// Opens a create view to add a 
+        /// new book to the API
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Posts the book to the API
+        /// </summary>
+        /// <param name="b">book to be added</param>
+        /// <returns></returns>
+        public async Task<IActionResult> Post(Book b)
+        {
+
+            await APIHelper.BookAPI.PostAsJsonAsync("books/post", b);
+            return Redirect("Index");
+        }
+
 
 
 

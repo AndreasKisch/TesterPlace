@@ -70,6 +70,7 @@ namespace BookSearch.Controllers
         public ActionResult<List<Book>> Post(Book b)
         {
 
+            b.Id = "B" + _services.SetID();
             var book = _services.AddBook(b);
 
             if (book == null)

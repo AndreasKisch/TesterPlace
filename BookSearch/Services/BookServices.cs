@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Linq;
@@ -15,6 +16,8 @@ namespace BookSearch
     {
         private readonly Dictionary<string, Models.Book> _bookList;
         XDocument doc;
+        static int id;
+        public int SetID() { return ++id; }
 
         /// <summary>
         /// Opens link to Xml file and adds content to a dictionary
@@ -25,6 +28,7 @@ namespace BookSearch
             doc = XDocument.Load(Environment.CurrentDirectory + "\\Data\\books.xml");
 
             FillDictionary(doc);
+            id = int.Parse(Regex.Match(_bookList.Values.Last().Id, @"\d+").Value);
         }
 
         /// <summary>

@@ -17,5 +17,6 @@ namespace BookSearch
         Dictionary<string, Book> GetBookList();
         Dictionary<string, Book> GetBookList(string searchValue);
         object UpdateBook(Book b);
+        int SetID();
     }
 }

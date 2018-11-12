@@ -4,7 +4,7 @@
     ViewData["Title"] = "Book Store";
 }
 
-<h2>Book Store</h2>
+
 <style>
     table {
         border: 1px solid #000000;
@@ -67,10 +67,10 @@
 
 
 
-
 <body>
-
     <div class="container">
+        <h2>Book Store</h2>
+        <a href="@Url.Action("Create")">Create new book</a>
         <form asp-controller="Book" asp-action="Index">
             <input id="bookInput" name="searchValue" type="text" placeholder="Search for title" />
             <input id="bookSubmit" type="submit" value="submit" />

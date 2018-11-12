@@ -1,0 +1,55 @@
+﻿@model Book
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<style>
+    .creatContainer {
+        display: inline-block;
+    }
+
+
+    #bInput {
+        width: 50%;
+        padding: 5px;
+        margin: 5px;
+    }
+</style>
+
+<h2>Create new</h2>
+
+<h4>Book</h4>
+
+<div>
+    <form method="post" action="@Url.Action("Post","Book")">
+
+        <div class="createContainer">
+            @Html.LabelFor(model => model.Author);
+            <input id="bInput" name="Author" type="text" /><br />
+
+            @Html.LabelFor(model => model.Title);
+            <input id="bInput" name="Title" type="text" /><br />
+
+            @Html.LabelFor(model => model.Genre);
+            <input id="bInput" name="Genre" type="text" /><br />
+
+            @Html.LabelFor(model => model.PublishDate);
+            <input id="bInput" name="PublishDate" type="date" /><br />
+
+            @Html.LabelFor(model => model.Price);
+            <input id="bInput" name="Price" type="number" min="0" step=".01" /><br />
+
+            @Html.LabelFor(model => model.Description);
+            <input id="bInput" name="Description" type="text" />
+        </div>
+
+
+        <div>
+            <input id="submitBook" type="submit" value="submit" />
+        </div>
+    </form>
+</div>
+
+
+
