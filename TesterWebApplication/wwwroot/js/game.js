@@ -6,125 +6,135 @@ var ctx = canvas.getContext("2d");
 var score = 0;
 var active;
 
-var rightPressed = false;
-var leftPressed = false;
 document.addEventListener("keydown", keyDown, false);
 document.addEventListener("keyup", keyUp, false);
 
-var x = canvas.width / 2;
-var y = canvas.height - 30;
-var ballRadius = 10;
-var dx = 2;
-var dy = -2;
-
-var paddleHeight = 10;
-var paddleWidth = 75;
-var paddleSpeed = 2;
-var paddleX = (canvas.width - paddleWidth) / 2;
 
 
 
-//Handles ball collitions with edges and paddle
-function ballCollition() {
-    if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
-        dx = -dx;
+var myPaddle;
+
+function paddleObject(x, width, height) {
+    this.xPos = x;
+    this.pWidth = width;
+    this.pHeight = height;
+    this.pSpeed = 0;
+
+    this.move = function () {
+        this.xPos += this.pSpeed;
     }
 
-    if (y + dy < ballRadius) {
-        dy = -dy;
+    this.changeSpeed = function (speed) {
+        this.pSpeed = speed;
     }
-    else if (y + dy > canvas.height - (ballRadius / 2)) {
-        if (x > paddleX && x < (paddleX + paddleWidth)) {
-            dy = -dy;
-            ++score;
+
+    this.colltion = function () {
+        if (this.xPos > canvas.width - this.pWidth && this.pSpeed > 0) {
+            this.xPos = canvas.width - this.pWidth;
         }
-        else {
-            alert("Loser!");
-            x = canvas.width / 2;
-            y = canvas.height - 30;
-            ballRadius = 10;
-            dx = 2;
-            dy = -2;
-            score = 0;
-            clearInterval(active);
-            document.getElementById("startBtn").style.visibility = "visible";
+        else if (this.xPos < 0 && this.pSpeed < 0) {
+            this.xPos = 0;
         }
     }
 
-
-}
-
-//Changes the position of the paddle
-function movePaddle() {
-    if (rightPressed && paddleX < canvas.width - paddleWidth) {
-        paddleX += paddleSpeed;
-    }
-    else if (leftPressed && paddleX > 0) {
-        paddleX -= paddleSpeed;
+    this.draw = function (ctx) {
+        ctx.beginPath();
+        ctx.rect(this.xPos, canvas.height - this.pHeight, this.pWidth, this.pHeight);
+        ctx.fillStyle = "#0095DD";
+        ctx.fill();
+        ctx.closePath();
     }
 }
 
 
-function drawPaddle() {
-    ctx.beginPath();
-    ctx.rect(paddleX, canvas.height - paddleHeight, paddleWidth, paddleHeight);
-    ctx.fillStyle = "#0095DD";
-    ctx.fill();
-    ctx.closePath();
+//ball rendered in canvas
+var ball;
+//function to create balls containing relevent vars and functions
+function ballObj(x, y, radius) {
+    this.xPos = x;
+    this.yPos = y;
+    this.ballRadius = radius;
+    this.xVel = 2;
+    this.yVel = -2;
+
+    this.draw = function (ctx) {
+        ctx.beginPath();
+        ctx.arc(this.xPos, this.yPos, this.ballRadius, 0, Math.PI * 2);
+        ctx.fillStyle = "#0095DD";
+        ctx.fill();
+        ctx.closePath();
+    }
+
+    this.move = function () {
+        this.xPos += this.xVel;
+        this.yPos += this.yVel;
+    }
+
+    this.colltion = function (paddle) {
+        if (this.xPos + this.xVel > canvas.width - this.ballRadius || this.xPos + this.xVel < this.ballRadius) {
+            this.xVel = -this.xVel;
+        }
+        if (this.yPos + this.yVel < this.ballRadius) {
+            this.yVel = -this.yVel;
+        }
+        else if (this.yPos + this.yVel > canvas.height - (this.ballRadius / 2)) {
+            if (this.xPos > paddle.xPos && this.xPos < (paddle.xPos + paddle.pWidth)) {
+                this.yVel = -this.yVel;
+                ++score;
+            }
+            else {
+                score = 0;
+                rightPressed = false;
+                leftPressed = false;
+                clearInterval(active);
+                document.getElementById("startBtn").style.visibility = "visible";
+            }
+        }
+    }
+
 }
 
-function drawBall() {
-    ctx.beginPath();
-    ctx.arc(x, y, ballRadius, 0, Math.PI * 2);
-    ctx.fillStyle = "#0095DD";
-    ctx.fill();
-    ctx.closePath();
-}
 
-function drawScore() {
-    ctx.beginPath();
-    ctx.font = "30px Arial"
-    ctx.fillStyle = "red";
-    ctx.fillText("Score:" + score, 50, 50);
-    ctx.closePath();
-}
 
-function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawBall();
-    drawPaddle();
-    drawScore();
-}
+
 
 function keyDown(e) {
     if (e.keyCode == 37) {
-        leftPressed = true;
-        rightPressed = false;
+        myPaddle.changeSpeed(-3);
     }
     else if (e.keyCode == 39) {
-        rightPressed = true;
-        leftPressed = false;
+        myPaddle.changeSpeed(3);
+
     }
 }
 
 function keyUp(e) {
     if (e.keyCode == 37) {
-        leftPressed = false;
+        myPaddle.changeSpeed(0);
     }
     else if (e.keyCode == 39) {
-        rightPressed = false;
+        myPaddle.changeSpeed(0);
     }
 }
 
 function Update() {
+    myPaddle.move();
+    myPaddle.colltion();
+    ball.move();
+    ball.colltion(myPaddle);
     draw();
-    movePaddle();
-    x += dx;
-    y += dy;
-    ballCollition();
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ball.draw(ctx);
+    myPaddle.draw(ctx);
 }
 
 function startGame() {
     active = setInterval(Update, 10);
     document.getElementById("startBtn").style.visibility = "hidden";
+    ball = new ballObj(canvas.width / 2, canvas.height - 30, 10)
+    myPaddle = new paddleObject(canvas.width / 2, 75, 10);
+
 }
