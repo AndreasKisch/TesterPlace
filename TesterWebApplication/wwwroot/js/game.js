@@ -4,6 +4,7 @@ var canvas = document.getElementById("gameArea");
 var ctx = canvas.getContext("2d");
 
 var score = 0;
+var active;
 
 var rightPressed = false;
 var leftPressed = false;
@@ -32,7 +33,7 @@ function ballCollition() {
     if (y + dy < ballRadius) {
         dy = -dy;
     }
-    else if (y + dy > canvas.height - (ballRadius/2)) {
+    else if (y + dy > canvas.height - (ballRadius / 2)) {
         if (x > paddleX && x < (paddleX + paddleWidth)) {
             dy = -dy;
             ++score;
@@ -45,6 +46,8 @@ function ballCollition() {
             dx = 2;
             dy = -2;
             score = 0;
+            clearInterval(active);
+            document.getElementById("startBtn").style.visibility = "visible";
         }
     }
 
@@ -121,5 +124,7 @@ function Update() {
     ballCollition();
 }
 
-setInterval(Update, 10);
-
+function startGame() {
+    active = setInterval(Update, 10);
+    document.getElementById("startBtn").style.visibility = "hidden";
+}
