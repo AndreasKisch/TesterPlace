@@ -11,14 +11,15 @@ document.addEventListener("keyup", keyUp, false);
 
 
 
-
+//paddle rendered in canvas
 var myPaddle;
-
-function paddleObject(x, width, height) {
+//function to allow the creation of paddles with relevent vars and functions
+function paddleObject(x, width, height, clr) {
     this.xPos = x;
     this.pWidth = width;
     this.pHeight = height;
     this.pSpeed = 0;
+    this.colour = clr;
 
     this.move = function () {
         this.xPos += this.pSpeed;
@@ -40,27 +41,26 @@ function paddleObject(x, width, height) {
     this.draw = function (ctx) {
         ctx.beginPath();
         ctx.rect(this.xPos, canvas.height - this.pHeight, this.pWidth, this.pHeight);
-        ctx.fillStyle = "#0095DD";
+        ctx.fillStyle = this.colour;
         ctx.fill();
         ctx.closePath();
     }
 }
 
-
 //ball rendered in canvas
 var ball;
 //function to create balls containing relevent vars and functions
-function ballObj(x, y, radius) {
+function ballObj(x, y, radius, clr) {
     this.xPos = x;
     this.yPos = y;
     this.ballRadius = radius;
     this.xVel = 2;
     this.yVel = -2;
-
+    this.colour = clr;
     this.draw = function (ctx) {
         ctx.beginPath();
         ctx.arc(this.xPos, this.yPos, this.ballRadius, 0, Math.PI * 2);
-        ctx.fillStyle = "#0095DD";
+        ctx.fillStyle = this.colour;
         ctx.fill();
         ctx.closePath();
     }
@@ -83,19 +83,12 @@ function ballObj(x, y, radius) {
                 ++score;
             }
             else {
-                score = 0;
-                rightPressed = false;
-                leftPressed = false;
-                clearInterval(active);
-                document.getElementById("startBtn").style.visibility = "visible";
+                gameOver();
             }
         }
     }
 
 }
-
-
-
 
 
 function keyDown(e) {
@@ -117,6 +110,7 @@ function keyUp(e) {
     }
 }
 
+
 function Update() {
     myPaddle.move();
     myPaddle.colltion();
@@ -129,12 +123,19 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ball.draw(ctx);
     myPaddle.draw(ctx);
+    ctx.font = "15px Comic Sans MS";
+    ctx.fillStyle = "pink";
+    ctx.fillText("Score: " + score, 5, 15);
 }
 
 function startGame() {
     active = setInterval(Update, 10);
     document.getElementById("startBtn").style.visibility = "hidden";
-    ball = new ballObj(canvas.width / 2, canvas.height - 30, 10)
-    myPaddle = new paddleObject(canvas.width / 2, 75, 10);
+    ball = new ballObj(canvas.width / 2, canvas.height - 30, 10, "orange")
+    myPaddle = new paddleObject(canvas.width / 2, 75, 10, "black");
+}
 
+function gameOver() {
+    clearInterval(active);
+    document.getElementById("startBtn").style.visibility = "visible";
 }
